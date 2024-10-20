@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-function PlannerList() {
+function Planner() {
+  const location = useLocation();
+  const { state } = location;
   const [planners, setPlanners] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    async function fetchPlanners() {
+    const fetchPlanners = async () => {
       try {
         const response = await fetch("http://localhost:3002/planners");
         if (!response.ok) {
@@ -13,38 +15,58 @@ function PlannerList() {
         }
         const data = await response.json();
         setPlanners(data);
-      } catch (err) {
-        setError(err.message);
-        console.error(err);
+      } catch (error) {
+        console.error("Error fetching planners:", error);
       }
-    }
+    };
 
     fetchPlanners();
   }, []);
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
+  console.log(planners);
   return (
-    <div>
-      <h1>Planners List</h1>
-      <ul>
-        {planners.map((planner, index) => (
-          <li key={index}>
-            <h2>Destination: {planner.destination}</h2>
-            <p>Description: {planner.description}</p>
-            <p>Start Date: {planner.startDate}</p>
-            <p>End Date: {planner.endDate}</p>
-            <p>Hotel Name: {planner.hotelName}</p>
-            <p>Address: {planner.address}</p>
-            <p>Duration: {planner.duration} days</p>
-            <p>Activities: {planner.activities}</p>
-          </li>
-        ))}
-      </ul>
+    <div className="container">
+      <h1>Your Travel Plans</h1>
+
+      {/* alle data von Travelplanner-von Form */}
+      {/* {state && (
+        <>
+          <h2>Newly Submitted Plan:</h2>
+          <h3>Destination: {state.destination}</h3>
+          <p>Description: {state.description}</p>
+          <p>Start Date: {state.startDate}</p>
+          <p>End Date: {state.endDate}</p>
+          <h4>Accommodation:</h4>
+          <p>Hotel Name: {state.hotelName}</p>
+          <p>Address: {state.address}</p>
+          <p>Duration of Stay: {state.duration}</p>
+          <h4>Activities:</h4>
+          <p>{state.activities}</p>
+        </>
+      )} */}
+
+      {/*  all travels von Database */}
+      <h2>All Travel Plans:</h2>
+      {planners.length > 0 ? (
+        planners.map((plan, index) => (
+          <div key={index} className="travel-plan">
+            <h3>Destination: {plan.destination}</h3>
+            <p>Description: {plan.description}</p>
+            <p>Start Date: {plan.startDate}</p>
+            <p>End Date: {plan.endDate}</p>
+            <h4>Accommodation:</h4>
+            <p>Hotel Name: {plan.hotelName}</p>
+            <p>Address: {plan.address}</p>
+            <p>Duration of Stay: {plan.duration}</p>
+            <h4>Activities:</h4>
+            <p>{plan.activities}</p>
+            <hr />
+          </div>
+        ))
+      ) : (
+        <p>keiene Reise gefunden</p>
+      )}
     </div>
   );
 }
 
-export default PlannerList;
+export default Planner;
