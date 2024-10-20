@@ -5,7 +5,7 @@ import "./index.css";
 import Home from "./pages/Home";
 import Travelplanner from "./pages/Travelplanner";
 import RecipeSearch from "./pages/API";
-import Planner from "./pages/Travelplanner/planner.jsx";
+import PlannerList from "./pages/Planner";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -22,8 +22,8 @@ const router = createBrowserRouter([
         element: <Travelplanner />,
       },
       {
-        path: "travelplanner/planner",
-        element: <Planner />,
+        path: "planner",
+        element: <PlannerList />,
       },
       {
         path: "api",

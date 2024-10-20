@@ -1,25 +1,50 @@
-import React from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-function ResultPage() {
-  const location = useLocation();
-  const { state } = location;
+function PlannerList() {
+  const [planners, setPlanners] = useState([]);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    async function fetchPlanners() {
+      try {
+        const response = await fetch("http://localhost:3002/planners");
+        if (!response.ok) {
+          throw new Error("Failed to fetch planners");
+        }
+        const data = await response.json();
+        setPlanners(data);
+      } catch (err) {
+        setError(err.message);
+        console.error(err);
+      }
+    }
+
+    fetchPlanners();
+  }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div className="container">
-      <h1>Your Travel Plan</h1>
-      <h2>Destination: {state.destination}</h2>
-      <p>Description: {state.description}</p>
-      <p>Start Date: {state.startDate}</p>
-      <p>End Date: {state.endDate}</p>
-      <h3>Accommodation:</h3>
-      <p>Hotel Name: {state.hotelName}</p>
-      <p>Address: {state.address}</p>
-      <p>Duration of Stay: {state.duration}</p>
-      <h3>Activities:</h3>
-      <p>{state.activities}</p>
+    <div>
+      <h1>Planners List</h1>
+      <ul>
+        {planners.map((planner, index) => (
+          <li key={index}>
+            <h2>Destination: {planner.destination}</h2>
+            <p>Description: {planner.description}</p>
+            <p>Start Date: {planner.startDate}</p>
+            <p>End Date: {planner.endDate}</p>
+            <p>Hotel Name: {planner.hotelName}</p>
+            <p>Address: {planner.address}</p>
+            <p>Duration: {planner.duration} days</p>
+            <p>Activities: {planner.activities}</p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
-export default ResultPage;
+export default PlannerList;

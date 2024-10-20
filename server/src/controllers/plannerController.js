@@ -1,5 +1,4 @@
 import Planner from "../modules/Planner.js";
-import db from "../util/db-connect.js";
 
 //Planner
 export const plannersearch = async (req, res) => {
@@ -16,7 +15,7 @@ export const plannersearch = async (req, res) => {
   }
 };
 
-export const planners = async (req, res) => {
+export const getAllPlanners = async (req, res) => {
   try {
     const result = await Planner.find({});
     res.json(result);

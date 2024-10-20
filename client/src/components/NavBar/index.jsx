@@ -16,7 +16,7 @@ export default function NavBar() {
             <a href="#">Tipps & Planung</a>
           </li>
           <li>
-            <a href="#">Reiseziele</a>
+            <Link to="/planner">Reiseziele</Link>
           </li>
           <li>{/* <Link to="/travelplanner">login</Link> */}</li>
           <li>

@@ -26,7 +26,7 @@ function Travelplanner() {
       return;
     } else {
       // Router Hinzufügen  Plannes List ??? ist das so richtig
-      navigate("/travelplanner/planner", { state: { formData } });
+      navigate("/planner", { state: formData });
     }
   }
   const handleOnSubmit = (e) => {
