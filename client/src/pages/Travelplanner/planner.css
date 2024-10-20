@@ -1,0 +1,65 @@
+.containerLogin {
+  width: 90%;
+  max-width: 800px;
+  margin: 50px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  color: #4a4a4a;
+}
+containerLogin h2 {
+  color: #3a819a;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+}
+
+.containerLogin form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.containerLogin input,
+.containerLogin textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #b0c4c8;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: #f0f8fa;
+}
+
+input[type="date"] {
+  width: 48%;
+  margin-right: 4%;
+}
+
+.containerLogin button {
+  background-color: #3a819a;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.containerLogin button:hover {
+  background-color: #2b6375;
+}
+
+@media (max-width: 768px) {
+  .containerLogin {
+    width: 90%;
+  }
+}
